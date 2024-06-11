@@ -1,6 +1,6 @@
 services:
   telegramBot:
-    image: coolcatx/telegrambot
+    image: nekromant322/netSalaryTgBot
     restart: always
     environment:
       BOT_KEY: ${BOT_KEY}
