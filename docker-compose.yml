@@ -1,0 +1,6 @@
+services:
+  telegramBot:
+    image: coolcatx/telegrambot
+    restart: always
+    environment:
+      BOT_KEY: ${BOT_KEY}
