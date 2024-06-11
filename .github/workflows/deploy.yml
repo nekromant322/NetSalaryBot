@@ -31,7 +31,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: nekromant322/netSalaryTgBot:latest
+          tags: nekromant322/net-salary-tg-bot:latest
           build-args: |
             BOT_KEY=${{ secrets.BOT_KEY }}
       - name: Copy docker-compose.yml to server
