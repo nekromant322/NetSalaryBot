@@ -1,4 +1,4 @@
-name: telegramBot
+name: build and deploy compose
 
 on:
   push:
