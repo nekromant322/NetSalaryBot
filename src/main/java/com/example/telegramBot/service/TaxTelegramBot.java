@@ -50,7 +50,7 @@ public class TaxTelegramBot extends TelegramLongPollingBot {
         String[] parts = messageText.split("\\s+");
         boolean numberFound = false;
         for (String part : parts) {
-            double salary = parseSalary(part);
+            int salary = parseSalary(part);
             if (salary != -1) {
                 processSalary(update, salary);
                 numberFound = true;
@@ -64,7 +64,7 @@ public class TaxTelegramBot extends TelegramLongPollingBot {
     }
 
     private void handleDirectMessage(Update update, String messageText) {
-        double salary = parseSalary(messageText);
+        int salary = parseSalary(messageText);
         if (salary != -1) {
             processSalary(update, salary);
         } else {
@@ -76,13 +76,13 @@ public class TaxTelegramBot extends TelegramLongPollingBot {
         }
     }
 
-    private void processSalary(Update update, double salary) {
+    private void processSalary(Update update, int salary) {
         SendMessage message = new SendMessage();
         message.setChatId(String.valueOf(update.getMessage().getChatId()));
         message.enableMarkdown(true);
 
-        double tax = taxService.countTax(salary);
-        double finalSalary = salary - tax;
+        int tax = taxService.countTax(salary);
+        int finalSalary = salary - tax;
         message.setText("*Размер зарплаты net:* " + finalSalary);
         sendResponse(update, message);
     }
@@ -95,13 +95,13 @@ public class TaxTelegramBot extends TelegramLongPollingBot {
         }
     }
 
-    private double parseSalary(String input) {
-        if (input.matches("\\d+(\\.\\d+)?к?")) {
-            if (input.toLowerCase().endsWith("к")) {
+    private int parseSalary(String input) {
+        if (input.matches("\\d+(\\.\\d+)?[кk]?")) {
+            if (input.toLowerCase().endsWith("к") || input.toLowerCase().endsWith("k")) {
                 input = input.substring(0, input.length() - 1);
-                return Double.parseDouble(input) * 1000;
+                return Integer.parseInt(input) * 1000;
             } else {
-                return Double.parseDouble(input);
+                return Integer.parseInt(input);
             }
         } else {
             return -1;

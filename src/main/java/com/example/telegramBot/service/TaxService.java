@@ -18,11 +18,11 @@ public class TaxService {
         TAX_STEPS_NEW.put(0, 0.13);
     }
 
-    public double countTax(double salary) {
-        double yearSalary = salary * MONTHS;
+    public int countTax(int salary) {
+        int yearSalary = salary * MONTHS;
         return countTax(yearSalary, TAX_STEPS_NEW);
     }
-    private double countTax(double salary, Map<Integer, Double> TAX_STEPS) {
+    private int countTax(int salary, Map<Integer, Double> TAX_STEPS) {
         if (salary <= 0) {
             throw new IllegalArgumentException("Зарплата должна быть больше нуля");
         }
@@ -35,6 +35,6 @@ public class TaxService {
                 salary = step.getKey();
             }
         }
-        return Double.parseDouble(String.format(Locale.ENGLISH, "%.2f", tax / MONTHS));
+        return (int) (tax / MONTHS);
     }
 }
