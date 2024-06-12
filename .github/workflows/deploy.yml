@@ -1,4 +1,4 @@
-name: telegramBot
+name: build and deploy compose
 
 on:
   push:
@@ -31,14 +31,14 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: nekromant322/netSalaryTgBot:latest
+          tags: nekromant322/net-salary-tg-bot:latest
           build-args: |
             BOT_KEY=${{ secrets.BOT_KEY }}
       - name: Copy docker-compose.yml to server
         uses: appleboy/scp-action@master
         with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USERNAME }}
+          host: "194.87.237.176"
+          username: "salarybot"
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: 22
           source: "docker-compose.yml"
@@ -47,8 +47,8 @@ jobs:
         if: success()
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USERNAME }}
+          host: "194.87.237.176"
+          username: "salarybot"
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: 22
           script: |
