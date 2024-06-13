@@ -87,11 +87,11 @@ public class TaxTelegramBot extends TelegramLongPollingBot {
         int finalSalary = salary - tax;
         String responseText;
         if (originalFormat.endsWith("к")) {
-            responseText = "*Размер зарплаты net:* " + (finalSalary / 1000) + "к";
+            responseText = "*Зарплата net:* " + (finalSalary / 1000) + "к";
         } else if (originalFormat.endsWith("k")) {
-            responseText = "*Размер зарплаты net:* " + (finalSalary / 1000) + "k";
+            responseText = "*Зарплата net:* " + (finalSalary / 1000) + "k";
         } else {
-            responseText = "*Размер зарплаты net:* " + finalSalary;
+            responseText = "*Зарплата net:* " + finalSalary;
         }
 
         message.setText(responseText);
