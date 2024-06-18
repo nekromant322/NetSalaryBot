@@ -49,5 +49,5 @@ jobs:
             sudo docker-compose down
             sudo docker-compose pull
             echo "BOT_KEY=${{ secrets.BOT_KEY }}" > .env
-            sudo -E docker-compose --env-file .env up -d
+            sudo -E docker compose --env-file .env up -d
             rm -f .env
