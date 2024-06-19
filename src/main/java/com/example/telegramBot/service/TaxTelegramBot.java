@@ -100,8 +100,8 @@ public class TaxTelegramBot extends TelegramLongPollingBot {
     }
 
     private void sendResponse(Update update, SendMessage message) {
-        Integer messageId = update.getMessage().getMessageId();
-        message.setReplyToMessageId(messageId);
+        Integer messageThreadId = update.getMessage().getMessageThreadId();
+        message.setReplyToMessageId(messageThreadId);
         try {
             execute(message);
         } catch (TelegramApiException e) {
