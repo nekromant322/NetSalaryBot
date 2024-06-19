@@ -102,6 +102,7 @@ public class TaxTelegramBot extends TelegramLongPollingBot {
 
     private void sendResponse(Update update, SendMessage message) {
         try {
+            logger.info("Getting update from chat_id: "  + update.getMessage().getChatId() + " with thread_id: " + update.getMessage().getMessageThreadId() + " then Sending message to chat_id: " + message.getChatId() + " with thread_id: " + message.getMessageThreadId());
             execute(message);
         } catch (TelegramApiException e) {
             logger.error("Error sending message", e);
