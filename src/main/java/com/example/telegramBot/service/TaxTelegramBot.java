@@ -46,6 +46,7 @@ public class TaxTelegramBot extends TelegramLongPollingBot {
     private void handleMention(Update update, String messageText) {
         SendMessage message = new SendMessage();
         message.setChatId(String.valueOf(update.getMessage().getChatId()));
+        message.setMessageThreadId(update.getMessage().getMessageThreadId());
         message.enableMarkdown(true);
 
         String[] parts = messageText.split("\\s+");
@@ -100,8 +101,6 @@ public class TaxTelegramBot extends TelegramLongPollingBot {
     }
 
     private void sendResponse(Update update, SendMessage message) {
-        Integer messageThreadId = update.getMessage().getMessageThreadId();
-        message.setMessageThreadId(messageThreadId);
         try {
             execute(message);
         } catch (TelegramApiException e) {
